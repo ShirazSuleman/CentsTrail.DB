@@ -14,12 +14,12 @@ END;
 GO
 
 CREATE PROCEDURE [dbo].[GetUserTransactionSummary] @UserID NVARCHAR(128),
-												   @PartitionByCategory BIT = 0,
+												   @PartitionByCategory BIT = NULL,
 												   @StartDate DATETIME = NULL,
 												   @EndDate DATETIME = NULL 
 AS
 BEGIN
-	IF (@PartitionByCategory = 0)
+	IF (ISNULL(@PartitionByCategory, 0) = 0)
 	BEGIN
 		SELECT ut.[UserID],
 			   CAST(SUM(ut.[Amount]) AS DECIMAL(15, 2)) AS AmountTotal,
