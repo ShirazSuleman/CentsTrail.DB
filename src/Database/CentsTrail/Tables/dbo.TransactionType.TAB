@@ -1,0 +1,23 @@
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+GO
+
+IF NOT EXISTS (
+			  SELECT 1 
+			  FROM sys.tables 
+			  WHERE name = 'TransactionType'
+		  )
+BEGIN
+	CREATE TABLE [dbo].[TransactionType]
+	(
+		[TransactionTypeID] INT NOT NULL,
+		[Name] NVARCHAR(256) NOT NULL,
+		[IsLimitSupported] BIT NOT NULL CONSTRAINT [df_TransactionType_IsLimitSupported] DEFAULT ((0)),
+		[DateAdded] DATETIME NOT NULL CONSTRAINT [df_TransactionType_DateAdded] DEFAULT (GETUTCDATE()),
+
+		CONSTRAINT [pk_TransactionType_TransactionTypeID] PRIMARY KEY CLUSTERED (TransactionTypeID ASC),
+		CONSTRAINT [uq_TransactionType_Name] UNIQUE (Name)
+	);
+END;
+GO
+

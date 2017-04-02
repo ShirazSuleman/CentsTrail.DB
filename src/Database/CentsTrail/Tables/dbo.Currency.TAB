@@ -1,0 +1,22 @@
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+GO
+
+IF NOT EXISTS (
+			  SELECT 1 
+			  FROM sys.tables 
+			  WHERE name = 'Currency'
+		  )
+BEGIN
+	CREATE TABLE [dbo].[Currency]
+	(
+		[CurrencyID] INT NOT NULL,
+		[Name] NVARCHAR(256) NOT NULL,
+		[Symbol] CHAR(3) NOT NULL,
+
+		CONSTRAINT [pk_Currency_TransactionTypeID] PRIMARY KEY CLUSTERED (CurrencyID ASC),
+		CONSTRAINT [uq_Currency_Name] UNIQUE (Name)
+	);
+END;
+GO
+

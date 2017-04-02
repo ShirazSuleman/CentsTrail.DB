@@ -1,0 +1,27 @@
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+GO
+
+IF NOT EXISTS (
+			  SELECT 1 
+			  FROM sys.tables 
+			  WHERE name = 'UserTransaction'
+		  )
+BEGIN
+	CREATE TABLE [dbo].[UserTransaction]
+	(
+		[UserTransactionID] BIGINT IDENTITY(1, 1) NOT NULL,
+		[Description] NVARCHAR(256) NOT NULL,
+		[UserID] NVARCHAR(128) NOT NULL,
+		[Amount] DECIMAL(15, 2) NOT NULL,
+		[UserCategoryID] BIGINT NOT NULL,
+		[DateAdded] DATETIME NOT NULL CONSTRAINT [df_UserTransaction_DateAdded] DEFAULT (GETUTCDATE()),
+		[TransactionDate] DATETIME NOT NULL,
+
+		CONSTRAINT [pk_UserTransaction_UserTransactionID_UserID] PRIMARY KEY CLUSTERED (UserTransactionID ASC, UserID ASC),
+		CONSTRAINT [fk_UserTransaction_UserID] FOREIGN KEY (UserID) REFERENCES [dbo].[User] (Id),
+		CONSTRAINT [fk_UserTransaction_UserCategoryID_UserID] FOREIGN KEY (UserCategoryID, UserID) REFERENCES [dbo].[UserCategory] (UserCategoryID, UserID),
+		CONSTRAINT [ck_UserTransaction_Amount] CHECK (Amount > 0)
+	);
+END;
+GO

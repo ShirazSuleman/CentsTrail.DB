@@ -1,0 +1,33 @@
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+GO
+
+IF EXISTS (
+			  SELECT 1 
+			  FROM sys.tables 
+			  WHERE name = 'User'
+		  )
+BEGIN
+	DROP TABLE [dbo].[User];
+END;
+GO
+
+CREATE TABLE [dbo].[User]
+(
+	[UserID] BIGINT IDENTITY(1, 1) NOT NULL,
+	[Email] NVARCHAR(256) NOT NULL,
+	[PasswordHash] NVARCHAR(128) NOT NULL,
+	[PasswordSalt] NVARCHAR(128) NOT NULL,
+	[EmailConfirmed] BIT NOT NULL CONSTRAINT [df_User_EmailConfirmed] DEFAULT ((0)),
+	[FailedLoginAttempts] INT NOT NULL CONSTRAINT [df_User_FailedLoginAttempts] DEFAULT ((0)),
+	[IsLocked] BIT NOT NULL CONSTRAINT [df_User_IsLocked] DEFAULT ((0)),
+	[FirstName] NVARCHAR(256) NULL,
+	[LastName] NVARCHAR(256) NULL,
+	[DateAdded] DATETIME NOT NULL CONSTRAINT [df_User_DateAdded] DEFAULT (GETUTCDATE()),
+	[CurrencyID] INT NOT NULL,
+
+	CONSTRAINT [pk_User_UserID] PRIMARY KEY CLUSTERED (UserID ASC),
+	CONSTRAINT [uq_User_Email] UNIQUE (Email),
+	CONSTRAINT [fk_User_CurrencyID] FOREIGN KEY (CurrencyID) REFERENCES [dbo].[Currency] (CurrencyID)
+);
+GO
