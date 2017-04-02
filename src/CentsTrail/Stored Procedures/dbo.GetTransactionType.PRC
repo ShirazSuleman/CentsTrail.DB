@@ -16,8 +16,6 @@ GO
 CREATE PROCEDURE [dbo].[GetTransactionType] @TransactionTypeID INT = NULL
 AS
 BEGIN
-	SET NOCOUNT ON;
-
 	SELECT [TransactionTypeID],
 		   [Name],
 		   [IsLimitSupported],

@@ -6,18 +6,15 @@ GO
 IF EXISTS (
 			SELECT 1
 			FROM sys.procedures
-			WHERE name = 'UpdateUserCategory'
+			WHERE name = 'DeleteUserCategory'
 		  )
 BEGIN
-	DROP PROCEDURE [dbo].[UpdateUserCategory];
+	DROP PROCEDURE [dbo].[DeleteUserCategory];
 END;
 GO
 
-CREATE PROCEDURE [dbo].[UpdateUserCategory] @UserCategoryID BIGINT,
-											@UserID NVARCHAR(128),
-											@Name NVARCHAR(512) = NULL,
-											@Limit DECIMAL(15, 2) = NULL,
-											@TransactionTypeID INT = NULL
+CREATE PROCEDURE [dbo].[DeleteUserCategory] @UserCategoryID BIGINT,
+											@UserID NVARCHAR(128)
 AS
 BEGIN
 	DECLARE @TranCount INT = @@TRANCOUNT;
@@ -27,7 +24,7 @@ BEGIN
 	DECLARE @ErrorLine INT;
 	
 	BEGIN TRY
-
+	
 		IF NOT EXISTS (
 						SELECT TOP 1 NULL
 						FROM [dbo].[UserCategory]
@@ -41,10 +38,7 @@ BEGIN
 		IF (@TranCount = 0)
 			BEGIN TRANSACTION;
 		
-				UPDATE [dbo].[UserCategory]
-				   SET [Name] = ISNULL(@Name, [Name]),
-					   [Limit] = ISNULL(@Limit, [Limit]),
-					   [TransactionTypeID] = ISNULL(@TransactionTypeID, [TransactionTypeID])
+				DELETE FROM [dbo].[UserCategory]
 				 WHERE UserCategoryID = @UserCategoryID
 				 AND UserID = @UserID;
 		

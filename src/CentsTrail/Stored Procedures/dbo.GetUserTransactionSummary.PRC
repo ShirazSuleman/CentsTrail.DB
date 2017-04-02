@@ -19,8 +19,6 @@ CREATE PROCEDURE [dbo].[GetUserTransactionSummary] @UserID NVARCHAR(128),
 												   @EndDate DATETIME = NULL 
 AS
 BEGIN
-	SET NOCOUNT ON;
-	
 	IF (@PartitionByCategory = 0)
 	BEGIN
 		SELECT ut.[UserID],

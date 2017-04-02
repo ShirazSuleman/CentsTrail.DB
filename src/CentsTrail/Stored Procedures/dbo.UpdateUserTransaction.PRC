@@ -21,8 +21,6 @@ CREATE PROCEDURE [dbo].[UpdateUserTransaction] @UserTransactionID BIGINT,
 											   @UserCategoryID BIGINT = NULL
 AS
 BEGIN
-	SET NOCOUNT ON;
-	
 	DECLARE @TranCount INT = @@TRANCOUNT;
 	
 	DECLARE @ErrorProcedure NVARCHAR(256);

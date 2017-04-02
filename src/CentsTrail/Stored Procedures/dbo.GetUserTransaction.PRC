@@ -22,8 +22,6 @@ CREATE PROCEDURE [dbo].[GetUserTransaction] @UserID NVARCHAR(128),
 									 
 AS
 BEGIN
-	SET NOCOUNT ON;
-
 	SELECT ut.[UserTransactionID]
 		  ,ut.[UserCategoryID]
 		  ,ut.[UserID]

@@ -16,8 +16,6 @@ GO
 CREATE PROCEDURE [dbo].[GetCurrency] @CurrencyID INT = NULL
 AS
 BEGIN
-	SET NOCOUNT ON;
-
 	SELECT [CurrencyID],
 		   [Name],
 		   [Symbol]

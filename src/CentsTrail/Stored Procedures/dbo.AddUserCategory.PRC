@@ -18,9 +18,7 @@ CREATE PROCEDURE [dbo].[AddUserCategory] @Name NVARCHAR(512),
 										 @Limit DECIMAL(15, 2) = NULL,
 										 @TransactionTypeID INT
 AS
-BEGIN
-	SET NOCOUNT ON;
-	
+BEGIN	
 	DECLARE @TranCount INT = @@TRANCOUNT;
 	
 	DECLARE @ErrorProcedure NVARCHAR(256);

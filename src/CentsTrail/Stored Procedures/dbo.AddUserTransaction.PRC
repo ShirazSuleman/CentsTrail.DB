@@ -20,8 +20,6 @@ CREATE PROCEDURE [dbo].[AddUserTransaction] @Description NVARCHAR(256),
 											@TransactionDate DATETIME
 AS
 BEGIN
-	SET NOCOUNT ON;
-	
 	DECLARE @TranCount INT = @@TRANCOUNT;
 	
 	DECLARE @ErrorProcedure NVARCHAR(256);

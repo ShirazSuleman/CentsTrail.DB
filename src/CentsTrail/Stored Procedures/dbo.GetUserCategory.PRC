@@ -18,8 +18,6 @@ CREATE PROCEDURE [dbo].[GetUserCategory] @UserID NVARCHAR(128),
 									 
 AS
 BEGIN
-	SET NOCOUNT ON;
-
 	SELECT [UserCategoryID]
 		  ,[UserID]
 		  ,[Name]
