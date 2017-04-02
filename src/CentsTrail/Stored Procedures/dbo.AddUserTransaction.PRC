@@ -17,7 +17,8 @@ CREATE PROCEDURE [dbo].[AddUserTransaction] @Description NVARCHAR(256),
 											@UserID NVARCHAR(128),
 											@Amount DECIMAL(15, 2),
 											@UserCategoryID BIGINT,
-											@TransactionDate DATETIME
+											@TransactionDate DATETIME,
+											@UserTransactionID BIGINT OUTPUT
 AS
 BEGIN
 	DECLARE @TranCount INT = @@TRANCOUNT;
@@ -27,9 +28,7 @@ BEGIN
 	DECLARE @ErrorLine INT;
 
 	BEGIN TRY
-	
-		DECLARE @UserTransactionID BIGINT;
-		
+			
 		IF (@TranCount = 0)
 			BEGIN TRANSACTION;
 
@@ -46,13 +45,11 @@ BEGIN
 					 @UserCategoryID,
 					 @TransactionDate);
 						
-				SELECT @UserTransactionID = SCOPE_IDENTITY();
+				SET @UserTransactionID = SCOPE_IDENTITY();
 		
 		IF (@TranCount = 0 AND XACT_STATE() != 0)
 			COMMIT TRANSACTION;
-		
-		RETURN @UserTransactionID;
-		
+				
 	END TRY
 	BEGIN CATCH
 	

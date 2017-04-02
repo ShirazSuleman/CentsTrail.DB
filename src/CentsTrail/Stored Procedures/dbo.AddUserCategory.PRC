@@ -16,7 +16,8 @@ GO
 CREATE PROCEDURE [dbo].[AddUserCategory] @Name NVARCHAR(512),
 										 @UserID NVARCHAR(128),
 										 @Limit DECIMAL(15, 2) = NULL,
-										 @TransactionTypeID INT
+										 @TransactionTypeID INT,
+										 @UserCategoryID BIGINT OUTPUT
 AS
 BEGIN	
 	DECLARE @TranCount INT = @@TRANCOUNT;
@@ -26,9 +27,7 @@ BEGIN
 	DECLARE @ErrorLine INT;
 	
 	BEGIN TRY
-	
-		DECLARE @UserCategoryID BIGINT;
-	
+		
 		IF (@TranCount = 0)
 			BEGIN TRANSACTION;
 		
@@ -43,13 +42,11 @@ BEGIN
 						@Limit,
 						@TransactionTypeID);
 						
-				SELECT @UserCategoryID = SCOPE_IDENTITY();
+				SET @UserCategoryID = SCOPE_IDENTITY();
 		
 		IF (@TranCount = 0 AND XACT_STATE() != 0)
 			COMMIT TRANSACTION;
-		
-		RETURN @UserCategoryID;
-		
+				
 	END TRY
 	BEGIN CATCH
 	
