@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>CentsTrail.DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a6a539ed-2e2b-4dc5-81ed-cf82fbf78112}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>CentsTrail.DB</RootNamespace>
+    <AssemblyName>CentsTrail.DB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DacApplicationName>CentsTrail</DacApplicationName>
+    <GenerateCreateScript>True</GenerateCreateScript>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SqlTargetName>CentsTrail</SqlTargetName>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Programmability" />
+    <Folder Include="Programmability\Stored Procedures" />
+    <Folder Include="Programmability\Stored Procedures\Category" />
+    <Folder Include="Programmability\Stored Procedures\Lookup" />
+    <Folder Include="Programmability\Stored Procedures\Account" />
+    <Folder Include="Programmability\Stored Procedures\Transaction" />
+    <Folder Include="Programmability\Stored Procedures\Period" />
+    <Folder Include="Presets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Currency.sql" />
+    <Build Include="Tables\CategoryType.sql" />
+    <Build Include="Tables\Role.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\UserClaim.sql" />
+    <Build Include="Tables\UserLogin.sql" />
+    <Build Include="Tables\UserRole.sql" />
+    <Build Include="Tables\__MigrationHistory.sql" />
+    <Build Include="Tables\Category.sql" />
+    <Build Include="Tables\Transaction.sql" />
+    <Build Include="Tables\Account.sql" />
+    <Build Include="Tables\Period.sql" />
+    <Build Include="Tables\AccountType.sql" />
+    <Build Include="Programmability\Stored Procedures\Category\AddCategory.sql" />
+    <Build Include="Programmability\Stored Procedures\Category\UpdateCategory.sql" />
+    <Build Include="Programmability\Stored Procedures\Category\GetCategory.sql" />
+    <Build Include="Programmability\Stored Procedures\Lookup\GetCurrency.sql" />
+    <Build Include="Programmability\Stored Procedures\Category\GetCategoryType.sql" />
+    <Build Include="Programmability\Stored Procedures\Account\GetAccountType.sql" />
+    <Build Include="Programmability\Stored Procedures\Category\DeleteCategory.sql" />
+    <Build Include="Programmability\Stored Procedures\Account\AddAccount.sql" />
+    <Build Include="Programmability\Stored Procedures\Account\DeleteAccount.sql" />
+    <Build Include="Programmability\Stored Procedures\Account\GetAccount.sql" />
+    <Build Include="Programmability\Stored Procedures\Account\UpdateAccount.sql" />
+    <Build Include="Programmability\Stored Procedures\Period\AddPeriod.sql" />
+    <Build Include="Programmability\Stored Procedures\Period\DeletePeriod.sql" />
+    <Build Include="Programmability\Stored Procedures\Period\GetPeriod.sql" />
+    <Build Include="Programmability\Stored Procedures\Period\UpdatePeriod.sql" />
+    <Build Include="Programmability\Stored Procedures\Transaction\AddTransaction.sql" />
+    <Build Include="Programmability\Stored Procedures\Transaction\DeleteTransaction.sql" />
+    <Build Include="Programmability\Stored Procedures\Transaction\GetTransaction.sql" />
+    <Build Include="Programmability\Stored Procedures\Transaction\UpdateTransaction.sql" />
+    <Build Include="Programmability\Stored Procedures\Transaction\GetTransactionSummary.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Presets\Currencies.sql" />
+    <None Include="Presets\CategoryTypes.sql" />
+    <None Include="Presets\AccountTypes.sql" />
+  </ItemGroup>
+</Project>
