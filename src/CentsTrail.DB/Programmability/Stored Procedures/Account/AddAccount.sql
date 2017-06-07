@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[AddAccount]
 	@Name NVARCHAR(512),
 	@UserId NVARCHAR(128),
+	@CurrencyId INT,
 	@AccountTypeId INT,
 	@Id BIGINT OUTPUT
 AS
@@ -19,10 +20,12 @@ BEGIN
 				INSERT INTO [dbo].[Account]
 					   ([Name],
 						[UserId],
+						[CurrencyId],
 						[AccountTypeId])
 				 VALUES
 					   (@Name,
 						@UserId,
+						@CurrencyId,
 						@AccountTypeId);
 						
 				SET @Id = SCOPE_IDENTITY();

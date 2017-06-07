@@ -6,6 +6,7 @@ BEGIN
 	SELECT [Id]
 		  ,[UserId]
 		  ,[Name]
+		  ,[CurrencyId]
 		  ,[AccountTypeId]
 		  ,[DateAdded]
 	FROM [dbo].[Account]

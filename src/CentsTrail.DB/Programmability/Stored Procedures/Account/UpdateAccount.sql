@@ -2,6 +2,7 @@
 	@Id BIGINT,
 	@UserId NVARCHAR(128),
 	@Name NVARCHAR(512) = NULL,
+	@CurrencyId INT = NULL,
 	@AccountTypeId INT = NULL
 AS
 BEGIN
@@ -28,6 +29,7 @@ BEGIN
 		
 				UPDATE [dbo].[Account]
 				   SET [Name] = ISNULL(@Name, [Name]),
+					   [CurrencyId] = ISNULL(@CurrencyId, CurrencyId),
 					   [AccountTypeId] = ISNULL(@AccountTypeId, [AccountTypeId])
 				 WHERE [Id] = @Id
 				 AND [UserId] = @UserId;
