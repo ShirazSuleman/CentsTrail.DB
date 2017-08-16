@@ -13,6 +13,9 @@ BEGIN
 		  ,t.[AccountId]
 		  ,t.[CategoryId]
 		  ,t.[PeriodId]
+		  ,c.[Name] AS Category
+		  ,p.[Name] AS Period
+		  ,a.[Name] AS Account
 		  ,t.[UserId]
 		  ,t.[Description]
 		  ,t.[Amount]
